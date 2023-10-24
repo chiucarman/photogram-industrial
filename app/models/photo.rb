@@ -29,4 +29,9 @@ class Photo < ApplicationRecord
 
   # indirect associations
   has_many :fans, through: :likes
+
+  # validations
+  validates :caption, presence: true
+
+  validates :image, presence: true
 end
