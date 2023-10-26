@@ -23,7 +23,7 @@ class Photo < ApplicationRecord
   # direct associations
   belongs_to :owner, class_name: "User", counter_cache: true
 
-  has_many :comments, counter_cache: true
+  has_many :comments, counter_cache: true, class_name: "Comment", foreign_key: "photo_id"
 
   has_many :likes
 
@@ -31,9 +31,9 @@ class Photo < ApplicationRecord
   has_many :fans, through: :likes
 
   # validations
-  validates :caption, presence: true
+  # validates :caption, presence: true
 
-  validates :image, presence: true
+  # validates :image, presence: true
 
   # scope
   scope :past_week, -> { where(created_at: 1.week.ago...) }

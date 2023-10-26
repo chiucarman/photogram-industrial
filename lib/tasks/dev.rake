@@ -7,13 +7,13 @@ task sample_data: :environment do
 
   p "Creating sample data"
 
-  if Rails.env.development?
+  # if Rails.env.development?
     FollowRequest.delete_all
     Comment.delete_all
     Like.delete_all
     Photo.delete_all
     User.delete_all
-  end
+  # end
 
   12.times do
     name = Faker::Name.first_name
@@ -45,22 +45,21 @@ task sample_data: :environment do
         )
       end
     end
-  end
 
-  users.each do |user|
     rand(15).times do
-      photo = user.own_photos.create(
+      photo = first_user.own_photos.create(
         caption: Faker::Quote.jack_handey,
         image: "https://robohash.org/#{rand(9999)}"
       )
     
-      user.followers.each do |follower|
+      first_user.followers.each do |follower|
         if rand < 0.5
           photo.fans << follower
         end
 
         if rand < 0.25
-          photo.comments.create(
+          Comment.create(
+            photo: photo,
             body: Faker::Quote.jack_handey,
             author: follower
           )
