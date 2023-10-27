@@ -43,7 +43,7 @@ class User < ApplicationRecord
   has_many :likes, foreign_key: :fan_id
 
   # indirect associations
-  has_many :liked_photos, through: :likes, source: :photos
+  has_many :liked_photos, through: :likes, source: :photo
 
   has_many :leaders, through: :accepted_sent_follow_requests, source: :recipient
 
