@@ -10,7 +10,9 @@ Rails.application.routes.draw do
   resources :follow_requests
   resources :comments
   resources :photos
+
+  get ":username/liked" => "users#liked", as: :liked
   
-  get "/:username" => "users#show", as: :user
+  get ":username" => "users#show", as: :user
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 end
